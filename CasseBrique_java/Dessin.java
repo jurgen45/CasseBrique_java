@@ -1,16 +1,30 @@
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.*;
 
-public class Dessin extends JComponent{	
+public class Dessin extends JComponent{
+  private ModelePlateforme modele;	
   public ControlPlateforme c;
   public int x;
+  private Image mur;
   public Dessin(){
-    c = new ControlPlateforme();
-    x = c.xMouse;
+    this.modele = new ModelePlateforme();
+    c = new ControlPlateforme(this,this.modele);
+    this.addMouseListener(c);
+    this.addMouseMotionListener(c);
+    mur = Toolkit.getDefaultToolkit().getImage("mur.png");
+
   }
   @Override
   public void paintComponent(Graphics pinceau) {
   	Graphics pinceau1 = pinceau.create();
+
+    if (this.isOpaque()) {
+      // on repeint toute la surface avec la couleur de fond
+      pinceau1.setColor(this.getBackground());
+      pinceau1.fillRect(0, 0, this.getWidth(), this.getHeight());
+    }
+    pinceau1.drawImage(mur, 0, 0, this);
   	pinceau1.setColor(new Color(130,130,130));
   	pinceau1.fillRect(36,50,30,10);
 
@@ -23,6 +37,12 @@ public class Dessin extends JComponent{
   	pinceau1.fillRect(174,65,30,10);
 
     pinceau1.drawLine(0,400,500,400);
-    pinceau1.fillRect(x,405,60,10);
+    pinceau1.fillRect(this.modele.getPosition(),405,60,10);
+
+    pinceau1.fillOval(this.modele.getCenterX(),385,20,20);
+
   	}
+    public void Refresh(){
+      repaint();
+    }
 }

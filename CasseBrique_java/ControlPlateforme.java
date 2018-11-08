@@ -1,9 +1,11 @@
 import java.awt.event.*;
 
 public class ControlPlateforme extends MouseAdapter implements MouseMotionListener{
-	public int xMouse;
-	public ControlPlateforme(){
-		xMouse = 0;
+	private Dessin vue;
+	private ModelePlateforme modele;
+	public ControlPlateforme(Dessin v, ModelePlateforme m){
+		this.vue = v;
+		this.modele = m;
 	}
 	@Override
 	public void mousePressed(MouseEvent e){
@@ -11,7 +13,7 @@ public class ControlPlateforme extends MouseAdapter implements MouseMotionListen
 	}
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		xMouse=e.getX();
-		
+		this.modele.setPosition(e.getX());
+		this.vue.repaint();
 	}
 }
