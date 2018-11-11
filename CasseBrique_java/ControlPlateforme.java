@@ -9,11 +9,13 @@ public class ControlPlateforme extends MouseAdapter implements MouseMotionListen
 	}
 	@Override
 	public void mousePressed(MouseEvent e){
-
+		this.modele.setPositionBalle(e.getX(),385,1);
+		this.vue.repaint();
 	}
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		this.modele.setPosition(e.getX());
+		this.modele.setCentrePlateforme(e.getX());
 		this.vue.repaint();
 	}
 }

@@ -5,7 +5,7 @@ import java.awt.event.*;
 public class Dessin extends JComponent{
   private ModelePlateforme modele;	
   public ControlPlateforme c;
-  public int x;
+  private int yP;
   private Image mur;
   public Dessin(){
     this.modele = new ModelePlateforme();
@@ -13,6 +13,7 @@ public class Dessin extends JComponent{
     this.addMouseListener(c);
     this.addMouseMotionListener(c);
     mur = Toolkit.getDefaultToolkit().getImage("mur.png");
+    yP = 405;
 
   }
   @Override
@@ -39,7 +40,7 @@ public class Dessin extends JComponent{
     pinceau1.drawLine(0,400,500,400);
     pinceau1.fillRect(this.modele.getPosition(),405,60,10);
 
-    pinceau1.fillOval(this.modele.getCenterX(),385,20,20);
+    pinceau1.fillOval(this.modele.getCentreBalleX()-10,this.modele.getPositionBalleY(),20,20);
 
   	}
     public void Refresh(){
